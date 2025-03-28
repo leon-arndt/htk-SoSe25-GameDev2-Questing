@@ -10,6 +10,7 @@ namespace World
         public override void Interact(Transform interactor)
         {
             Debug.Log("Item wurde aufgehoben" + gameObject.name);
+            Destroy(gameObject);
         }
     }
 }

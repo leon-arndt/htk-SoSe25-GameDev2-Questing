@@ -25,9 +25,43 @@ namespace World
 
         private void DetectNearbyInteractables()
         {
-            
+            Collider[] hits = Physics.OverlapSphere(transform.position, interactionDistance); // schauen was um mich herum ist: Wände, Interactables, etc.
+            _nearbyInteractables.Clear(); // Interactable Liste leer machen
+            foreach (var hit in hits)
+            {
+                // jeden "hit" prüfen ob es ein Interactable ist oder nicht. Eine normale Wand ist kein Interactable
+                if (hit.TryGetComponent(out Interactable interactable))
+                {
+                    // dieser collider ist definitiv ein interactable
+                    _nearbyInteractables.Add(interactable);
+                }
+            }
+
+            _currentInteractable = GetClosestInteractable();
         }
-        
+
+        private Interactable GetClosestInteractable()
+        {
+            Interactable closest = null;
+            float closestDistance = float.MaxValue;
+
+            foreach (var interactable in _nearbyInteractables)
+            {
+                // schauen ob dieses GameObject näher ist als das bis-jetzt nächste
+                // distance ist z.B. 3 meter, etc. - vom Spieler (transform.position) entfernt
+                float distance = Vector3.Distance(transform.position, interactable.transform.position);
+
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closest = interactable;
+                }
+            }
+
+            // entweder null (kein Interactable) oder das nächste Interactable
+            return closest;
+        }
+
         private void CheckInteraction()
         {
             // TODO: bessere Lösung für Controller finden (neues Inputsystem nutzen)
