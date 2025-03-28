@@ -14,5 +14,10 @@ namespace LeonsGeheimeScripts
             isOpen = !isOpen;
             animator.SetBool(IsOpen, isOpen);
         }
+
+        public override string GetInteractionPrompt()
+        {
+            return isOpen ? "Close door" : "Open door";
+        }
     }
 }
