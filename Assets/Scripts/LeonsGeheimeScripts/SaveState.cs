@@ -5,7 +5,7 @@ namespace Logic
     /// </summary>
     public abstract class SaveState
     {
-        protected abstract void OnStartGame();
-        protected abstract void OnEndGame();
+        public abstract void OnStartGame();
+        public abstract void OnEndGame();
     }
 }
