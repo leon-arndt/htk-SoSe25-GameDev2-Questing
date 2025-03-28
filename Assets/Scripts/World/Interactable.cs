@@ -8,5 +8,11 @@ namespace World
     public abstract class Interactable : MonoBehaviour
     {
         public abstract void Interact(Transform interactor);
+        
+        /// <summary>
+        /// Was ist das Verb? Open, Pickup, Buy, etc.
+        /// </summary>
+        /// <returns></returns>
+        public abstract string GetInteractionVerb();
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UserInterface;
 
 namespace World
 {
@@ -20,7 +21,15 @@ namespace World
 
         private void UpdateUi()
         {
-            
+            if (_currentInteractable != null)
+            {
+                // es gibt ein interactable
+                InteractionView.ShowPrompt("Press E: " + _currentInteractable.GetInteractionVerb());
+            }
+            else
+            {
+                InteractionView.HidePrompt();
+            }
         }
 
         private void DetectNearbyInteractables()

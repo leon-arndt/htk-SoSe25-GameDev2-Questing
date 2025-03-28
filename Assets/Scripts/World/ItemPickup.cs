@@ -12,5 +12,10 @@ namespace World
             Debug.Log("Item wurde aufgehoben" + gameObject.name);
             Destroy(gameObject);
         }
+
+        public override string GetInteractionVerb()
+        {
+            return "Pickup" + gameObject.name;
+        }
     }
 }
