@@ -3,7 +3,7 @@ using LeonsGeheimeScripts;
 
 namespace Logic
 {
-    public class InventoryState : SaveState
+    public class FinishedInventoryState : SaveState
     {
         private Dictionary<FinishedItemType, uint> _items = new();
 
