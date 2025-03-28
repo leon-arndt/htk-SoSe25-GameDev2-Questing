@@ -7,12 +7,12 @@ namespace Logic
     {
         private Dictionary<FinishedItemType, uint> _items = new();
 
-        protected override void OnStartGame()
+        public override void OnStartGame()
         {
             _items = new();
         }
 
-        protected override void OnEndGame()
+        public override void OnEndGame()
         {
         }
 
