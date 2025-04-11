@@ -28,5 +28,18 @@ namespace Logic
 
             SceneManager.LoadScene(2);
         }
+        
+        public static T Get<T> () where T : SaveState
+        {
+            foreach (var saveState in _gameStates)
+            {
+                if (saveState is T t)
+                {
+                    return t;
+                }
+            }
+            
+            throw new System.Exception($"No save state of type {typeof(T)} found.");
+        }
     }
 }
