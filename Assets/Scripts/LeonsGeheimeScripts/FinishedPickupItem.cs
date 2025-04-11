@@ -1,20 +1,22 @@
-﻿using UnityEngine;
+﻿using Logic;
+using UnityEngine;
 
 namespace LeonsGeheimeScripts
 {
     public class FinishedPickupItem : FinishedInteractable
     {
-        [SerializeField] private string itemName = "Default Item";
+        [SerializeField] private FinishedItemType itemType;
+        [SerializeField] private uint amount = 1;
 
         public override string GetInteractionPrompt()
         {
-            return $"Pick up {itemName}";
+            return $"Pick up {itemType.name}";
         }
 
         public override void Interact(Transform _)
         {
-            Debug.Log($"Picked up {itemName}");
-            Destroy(gameObject); // Remove the item from the world
+            FinishedGameState.Get<FinishedInventoryState>().Add(itemType, amount);
+            Destroy(gameObject);
         }
     }
 }

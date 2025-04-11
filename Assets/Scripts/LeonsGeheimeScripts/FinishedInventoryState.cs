@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using LeonsGeheimeScripts;
+using Logic;
 
-namespace Logic
+namespace LeonsGeheimeScripts
 {
     public class FinishedInventoryState : SaveState
     {
@@ -20,8 +20,23 @@ namespace Logic
         {
             return _items;
         }
+        
+        public uint Count(FinishedItemType type)
+        {
+            if (type == null)
+            {
+                return 0;
+            }
 
-        private void Add(FinishedItemType type, uint amount)
+            if (_items.TryGetValue(type, out var amount))
+            {
+                return amount;
+            }
+
+            return 0;
+        }
+
+        public void Add(FinishedItemType type, uint amount)
         {
             if (type == null || amount == 0)
             {
