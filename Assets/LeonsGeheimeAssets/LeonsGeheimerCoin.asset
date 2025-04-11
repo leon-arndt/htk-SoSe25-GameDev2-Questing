@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c051520304e343cf98271bf5f27d7803, type: 3}
   m_Name: LeonsGeheimerCoin
   m_EditorClassIdentifier: 
-  itemName: Item Name
+  itemName: Coin
   itemSprite: {fileID: 21300000, guid: b74c31d447d2f5d41a61081bdf5e7126, type: 3}
   marketPrice: 1

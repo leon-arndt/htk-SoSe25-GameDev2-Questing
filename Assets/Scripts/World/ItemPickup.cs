@@ -1,3 +1,5 @@
+using Data;
+using Logic;
 using UnityEngine;
 
 namespace World
@@ -7,9 +9,13 @@ namespace World
     /// </summary>
     public class ItemPickup : Interactable
     {
+        [SerializeField] private ItemType itemType;
+        [SerializeField] private uint amount = 1;
+        
         public override void Interact(Transform interactor)
         {
             Debug.Log("Item wurde aufgehoben" + gameObject.name);
+            GameState.Get<InventoryState>().Add(itemType, amount);
             Destroy(gameObject);
         }
 
