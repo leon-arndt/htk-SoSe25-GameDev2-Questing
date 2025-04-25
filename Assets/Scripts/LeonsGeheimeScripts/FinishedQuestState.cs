@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Logic;
@@ -77,6 +78,21 @@ namespace LeonsGeheimeScripts
 
             match.Status = QuestStatus.Completed;
             Debug.Log("Quest " + questName + " completed");
+        }
+
+        public IReadOnlyList<QuestState> GetCompletableQuests()
+        {
+            return _questStates.Where(x => x.Status == QuestStatus.Started && x.Quest.IsMet()).ToList();
+        }
+
+        public IReadOnlyList<QuestState> GetStartedQuests()
+        {
+            return _questStates.Where(x => x.Status == QuestStatus.Started).ToList();
+        }
+
+        public IReadOnlyList<QuestState> GetCompletedQuests()
+        {
+            return _questStates.Where(q => q.Status == QuestStatus.Completed).ToList();
         }
     }
 

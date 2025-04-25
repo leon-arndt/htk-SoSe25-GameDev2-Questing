@@ -37,6 +37,35 @@ namespace LeonsGeheimeScripts
         {
             _story = new Story(textAsset.text);
             speakerName.text = character.CharacterName;
+            
+            foreach (var quest in GameState.Get<FinishedQuestState>().GetCompletableQuests())
+            {
+                var varName = "completable_" + quest.Quest.GetId().ToLower();
+                if (_story.variablesState.Contains(varName))
+                {
+                    _story.variablesState[varName] = true;
+                }
+            }
+
+            foreach (var quest in GameState.Get<FinishedQuestState>().GetCompletedQuests())
+            {
+                var varName = "completed_" + quest.Quest.GetId().ToLower();
+                if (_story.variablesState.Contains(varName))
+                {
+                    _story.variablesState[varName] = true;
+                }
+            }
+
+            foreach (var quest in GameState.Get<FinishedQuestState>().GetStartedQuests())
+            {
+                var varName = "started_" + quest.Quest.GetId().ToLower();
+                if (_story.variablesState.Contains(varName))
+                {
+                    _story.variablesState[varName] = true;
+                }
+            }
+            
+            ShowStory();
         }
         
         private void ShowStory()
