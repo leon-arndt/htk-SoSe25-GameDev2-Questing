@@ -19,7 +19,6 @@ namespace LeonsGeheimeScripts
         [SerializeField] private TextMeshProUGUI storyText;
         [SerializeField] private TextMeshProUGUI speakerName;
         [SerializeField] private FinishedDialogChoiceView buttonPrefab;
-        [SerializeField] private Image speakerPortrait;
         private Story _story;
         private ItemType[] _itemTypes;
         
