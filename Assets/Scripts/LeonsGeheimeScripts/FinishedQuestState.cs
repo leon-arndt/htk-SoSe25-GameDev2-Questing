@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Logic;
@@ -8,23 +9,27 @@ namespace LeonsGeheimeScripts
     public class FinishedQuestState : SaveState
     {
         private List<QuestState> _questStates = new();
+        private List<FinishedQuest> _allPossibleQuests = new();
 
         public override void OnStartGame()
         {
             _questStates = new List<QuestState>();
+            _allPossibleQuests = Resources.LoadAll<FinishedQuest>("Quests").ToList();
         }
 
         public override void OnEndGame()
         {
         }
 
-        public void StartQuest(IQuest quest)
+        public void StartQuest(string questId)
         {
-            if (_questStates.Any(q => q.Quest.GetId() == quest.GetId()))
+            if (_questStates.Any(q => q.Quest.GetId().Equals(questId, StringComparison.OrdinalIgnoreCase)))
             {
-                Debug.LogWarning($"Quest{quest.GetId()} already started - not starting it again");
+                Debug.LogWarning($"Quest{questId} already started - not starting it again");
                 return;
             }
+            
+            var quest = _allPossibleQuests.FirstOrDefault(q => q.GetId().Equals(questId, StringComparison.OrdinalIgnoreCase));
 
             var state = new QuestState()
             {
@@ -51,13 +56,13 @@ namespace LeonsGeheimeScripts
 
         public void RemoveQuest(string questId)
         {
-            var match = _questStates.Find(q => q.Quest.GetId() == questId);
+            var match = _questStates.Find(q => q.Quest.GetId().Equals(questId, StringComparison.OrdinalIgnoreCase));
             _questStates.Remove(match);
         }
 
         public void CompleteQuest(string questName)
         {
-            var match = _questStates.Find(q => q.Quest.GetId() == questName);
+            var match = _questStates.Find(q => q.Quest.GetId().Equals(questName, StringComparison.OrdinalIgnoreCase));
             if (match.Status == QuestStatus.Completed)
             {
                 Debug.LogWarning($"Quest {questName} already completed - not completing it again");

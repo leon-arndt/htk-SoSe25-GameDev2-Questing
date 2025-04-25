@@ -92,9 +92,7 @@ namespace LeonsGeheimeScripts
                 if (currentTag.Contains("addQuest"))
                 {
                     var questName = currentTag.Split(' ')[1];
-                    var quest = _quests.First(q =>
-                        string.Equals(q.name, questName, StringComparison.OrdinalIgnoreCase));
-                    GameState.Get<FinishedQuestState>().StartQuest(quest);
+                    GameState.Get<FinishedQuestState>().StartQuest(questName);
                 }
 
                 if (currentTag.Contains("removeQuest"))
