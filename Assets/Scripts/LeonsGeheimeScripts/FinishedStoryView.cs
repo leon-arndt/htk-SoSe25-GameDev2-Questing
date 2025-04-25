@@ -19,7 +19,7 @@ namespace LeonsGeheimeScripts
         [SerializeField] private FinishedDialogChoiceView buttonPrefab;
         [SerializeField] private Image speakerPortrait;
         private Story _story;
-
+        
         public static FinishedStoryView Instance { get; private set; }
 
         private void Awake()
@@ -29,6 +29,12 @@ namespace LeonsGeheimeScripts
             gameObject.SetActive(false);
         }
 
+        public void StartStory(FinishedStoryCharacter character, TextAsset textAsset)
+        {
+            _story = new Story(textAsset.text);
+            speakerName.text = character.CharacterName;
+        }
+        
         private void ShowStory()
         {
             DestroyOldChoices();
@@ -47,14 +53,6 @@ namespace LeonsGeheimeScripts
         
         private void CreateContentView(string text)
         {
-            var speaker = _host.type.startingState.characterName;
-            speakerName.text = speaker;
-            storyText.color = Color.white;
-            if (_host.type.dialogColor != default)
-            {
-                storyText.color = _host.type.dialogColor;
-            }
-            
             storyText.text = text;
             DestroyOldChoices();
             if (_story.currentChoices.Count > 0)
@@ -105,14 +103,6 @@ namespace LeonsGeheimeScripts
                 {
                     var questName = currentTag.Split(' ')[1];
                     GameState.Get<FinishedQuestState>().CompleteQuest(questName);
-                }
-
-                if (currentTag.Contains("addItem"))
-                {
-                    var itemType = currentTag.Split(' ')[1];
-                    var itemData = _itemTypes.First(i =>
-                        string.Equals(i.name, itemType, StringComparison.OrdinalIgnoreCase));
-                    GameState.Get<InventoryState>().Add(itemData, 1);
                 }
             }
         }
