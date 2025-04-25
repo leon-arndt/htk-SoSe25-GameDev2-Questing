@@ -15,12 +15,12 @@ MonoBehaviour:
   description: Collect 20 coins
   isHidden: 0
   conditions:
-  - rid: 7113576926540726535
+  - rid: 7113576926540726544
   references:
     version: 2
     RefIds:
-    - rid: 7113576926540726535
-      type: {class: HasItemCondition, ns: Data, asm: Assembly-CSharp}
+    - rid: 7113576926540726544
+      type: {class: LocationCondition, ns: Data, asm: Assembly-CSharp}
       data:
-        type: {fileID: 11400000, guid: 93d044ee2816d4dc4843f1cdf19b2a66, type: 2}
-        amount: 20
+        locationType: 0
+        maxDistance: 5
