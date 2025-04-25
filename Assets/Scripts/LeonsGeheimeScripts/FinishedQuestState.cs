@@ -25,7 +25,7 @@ namespace LeonsGeheimeScripts
                 Debug.LogWarning($"Quest{quest.GetId()} already started - not starting it again");
                 return;
             }
-            
+
             var state = new QuestState()
             {
                 Quest = quest,
@@ -33,10 +33,10 @@ namespace LeonsGeheimeScripts
             };
             _questStates.Add(state);
             quest.OnQuestStart();
-            
+
             Debug.Log("Quest " + quest.GetId() + " started");
         }
-        
+
         public struct QuestState
         {
             public IQuest Quest;
@@ -48,6 +48,31 @@ namespace LeonsGeheimeScripts
             Started = 0,
             Completed = 1
         }
+
+        public void RemoveQuest(string questId)
+        {
+            var match = _questStates.Find(q => q.Quest.GetId() == questId);
+            _questStates.Remove(match);
+        }
+
+        public void CompleteQuest(string questName)
+        {
+            var match = _questStates.Find(q => q.Quest.GetId() == questName);
+            if (match.Status == QuestStatus.Completed)
+            {
+                Debug.LogWarning($"Quest {questName} already completed - not completing it again");
+                return;
+            }
+
+            if (!match.Quest.IsMet())
+            {
+                Debug.LogWarning($"Quest {questName} not met - not completing it");
+                return;
+            }
+
+            match.Status = QuestStatus.Completed;
+            Debug.Log("Quest " + questName + " completed");
+        }
     }
 
     public interface IQuest
@@ -56,5 +81,6 @@ namespace LeonsGeheimeScripts
         void OnQuestStart();
         public bool IsHidden();
         public string GetDescription();
+        bool IsMet();
     }
 }
