@@ -138,5 +138,12 @@ namespace LeonsGeheimeScripts
                 Destroy(child.gameObject);
             }
         }
+        
+        public void CloseStory()
+        {
+            gameObject.SetActive(false);
+            _story = null;
+            _host = null;
+        }
     }
 }
