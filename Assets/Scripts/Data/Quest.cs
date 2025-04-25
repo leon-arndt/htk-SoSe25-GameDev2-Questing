@@ -12,8 +12,8 @@ namespace Data
         // some quests should not be shown in the UI
         [SerializeField] private bool isHidden;
         
-        [SerializeField, SubclassSelector]
-        private List<IQuestCondition> conditions;
+        [SerializeReference, SubclassSelector]
+        public List<IQuestCondition> conditions;
 
         public bool AreConditionsMet()
         {
