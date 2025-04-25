@@ -10,12 +10,12 @@ namespace LeonsGeheimeScripts
     public class FinishedQuestState : SaveState
     {
         private List<QuestState> _questStates = new();
-        private List<FinishedQuest> _allPossibleQuests = new();
+        private List<FinishedFinishedQuest> _allPossibleQuests = new();
 
         public override void OnStartGame()
         {
             _questStates = new List<QuestState>();
-            _allPossibleQuests = Resources.LoadAll<FinishedQuest>("Quests").ToList();
+            _allPossibleQuests = Resources.LoadAll<FinishedFinishedQuest>("Quests").ToList();
         }
 
         public override void OnEndGame()
@@ -24,7 +24,7 @@ namespace LeonsGeheimeScripts
 
         public void StartQuest(string questId)
         {
-            if (_questStates.Any(q => q.Quest.GetId().Equals(questId, StringComparison.OrdinalIgnoreCase)))
+            if (_questStates.Any(q => q.FinishedQuest.GetId().Equals(questId, StringComparison.OrdinalIgnoreCase)))
             {
                 Debug.LogWarning($"Quest{questId} already started - not starting it again");
                 return;
@@ -34,7 +34,7 @@ namespace LeonsGeheimeScripts
 
             var state = new QuestState()
             {
-                Quest = quest,
+                FinishedQuest = quest,
                 Status = QuestStatus.Started,
             };
             _questStates.Add(state);
@@ -45,7 +45,7 @@ namespace LeonsGeheimeScripts
 
         public struct QuestState
         {
-            public IQuest Quest;
+            public IFinishedQuest FinishedQuest;
             public QuestStatus Status;
         };
 
@@ -57,20 +57,20 @@ namespace LeonsGeheimeScripts
 
         public void RemoveQuest(string questId)
         {
-            var match = _questStates.Find(q => q.Quest.GetId().Equals(questId, StringComparison.OrdinalIgnoreCase));
+            var match = _questStates.Find(q => q.FinishedQuest.GetId().Equals(questId, StringComparison.OrdinalIgnoreCase));
             _questStates.Remove(match);
         }
 
         public void CompleteQuest(string questName)
         {
-            var match = _questStates.Find(q => q.Quest.GetId().Equals(questName, StringComparison.OrdinalIgnoreCase));
+            var match = _questStates.Find(q => q.FinishedQuest.GetId().Equals(questName, StringComparison.OrdinalIgnoreCase));
             if (match.Status == QuestStatus.Completed)
             {
                 Debug.LogWarning($"Quest {questName} already completed - not completing it again");
                 return;
             }
 
-            if (!match.Quest.IsMet())
+            if (!match.FinishedQuest.IsMet())
             {
                 Debug.LogWarning($"Quest {questName} not met - not completing it");
                 return;
@@ -82,7 +82,7 @@ namespace LeonsGeheimeScripts
 
         public IReadOnlyList<QuestState> GetCompletableQuests()
         {
-            return _questStates.Where(x => x.Status == QuestStatus.Started && x.Quest.IsMet()).ToList();
+            return _questStates.Where(x => x.Status == QuestStatus.Started && x.FinishedQuest.IsMet()).ToList();
         }
 
         public IReadOnlyList<QuestState> GetStartedQuests()
@@ -96,7 +96,7 @@ namespace LeonsGeheimeScripts
         }
     }
 
-    public interface IQuest
+    public interface IFinishedQuest
     {
         string GetId();
         void OnQuestStart();

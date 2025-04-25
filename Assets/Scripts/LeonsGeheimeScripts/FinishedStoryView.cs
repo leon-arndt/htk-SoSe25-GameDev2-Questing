@@ -40,7 +40,7 @@ namespace LeonsGeheimeScripts
             
             foreach (var quest in GameState.Get<FinishedQuestState>().GetCompletableQuests())
             {
-                var varName = "completable_" + quest.Quest.GetId().ToLower();
+                var varName = "completable_" + quest.FinishedQuest.GetId().ToLower();
                 if (_story.variablesState.Contains(varName))
                 {
                     _story.variablesState[varName] = true;
@@ -49,7 +49,7 @@ namespace LeonsGeheimeScripts
 
             foreach (var quest in GameState.Get<FinishedQuestState>().GetCompletedQuests())
             {
-                var varName = "completed_" + quest.Quest.GetId().ToLower();
+                var varName = "completed_" + quest.FinishedQuest.GetId().ToLower();
                 if (_story.variablesState.Contains(varName))
                 {
                     _story.variablesState[varName] = true;
@@ -58,7 +58,7 @@ namespace LeonsGeheimeScripts
 
             foreach (var quest in GameState.Get<FinishedQuestState>().GetStartedQuests())
             {
-                var varName = "started_" + quest.Quest.GetId().ToLower();
+                var varName = "started_" + quest.FinishedQuest.GetId().ToLower();
                 if (_story.variablesState.Contains(varName))
                 {
                     _story.variablesState[varName] = true;

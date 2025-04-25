@@ -4,7 +4,7 @@ using UnityEngine;
 namespace LeonsGeheimeScripts
 {
     [CreateAssetMenu]
-    public class FinishedQuest : ScriptableObject, IQuest
+    public class FinishedFinishedQuest : ScriptableObject, IFinishedQuest
     {
         public bool isHidden;
         public string displayDescription;
