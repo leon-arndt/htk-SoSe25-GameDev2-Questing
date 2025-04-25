@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Data;
 using Ink.Runtime;
 using Logic;
 using TMPro;
@@ -19,6 +21,7 @@ namespace LeonsGeheimeScripts
         [SerializeField] private FinishedDialogChoiceView buttonPrefab;
         [SerializeField] private Image speakerPortrait;
         private Story _story;
+        private ItemType[] _itemTypes;
         
         public static FinishedStoryView Instance { get; private set; }
 
@@ -27,6 +30,8 @@ namespace LeonsGeheimeScripts
             Instance = this;
             DestroyOldChoices();
             gameObject.SetActive(false);
+            
+            _itemTypes = Resources.LoadAll<ItemType>("Items");
         }
 
         public void StartStory(FinishedStoryCharacter character, TextAsset textAsset)
@@ -104,6 +109,14 @@ namespace LeonsGeheimeScripts
                     var questName = currentTag.Split(' ')[1];
                     GameState.Get<FinishedQuestState>().CompleteQuest(questName);
                 }
+
+                if (currentTag.Contains("addItem"))
+                {
+                    var itemType = currentTag.Split(' ')[1];
+                    var itemData = _itemTypes.First(i =>
+                        string.Equals(i.name, itemType, StringComparison.OrdinalIgnoreCase));
+                    GameState.Get<InventoryState>().Add(itemData, 1);
+                }
             }
         }
         
@@ -131,7 +144,6 @@ namespace LeonsGeheimeScripts
         {
             gameObject.SetActive(false);
             _story = null;
-            _host = null;
         }
     }
 }
