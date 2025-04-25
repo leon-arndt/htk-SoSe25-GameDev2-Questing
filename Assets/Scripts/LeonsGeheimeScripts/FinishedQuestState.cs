@@ -54,5 +54,7 @@ namespace LeonsGeheimeScripts
     {
         string GetId();
         void OnQuestStart();
+        public bool IsHidden();
+        public string GetDescription();
     }
 }
