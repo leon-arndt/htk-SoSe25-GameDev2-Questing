@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Data;
 using Ink.Runtime;
@@ -38,34 +39,22 @@ namespace LeonsGeheimeScripts
             _story = new Story(textAsset.text);
             speakerName.text = character.CharacterName;
             
-            foreach (var quest in GameState.Get<FinishedQuestState>().GetCompletableQuests())
-            {
-                var varName = "completable_" + quest.FinishedQuest.GetId().ToLower();
-                if (_story.variablesState.Contains(varName))
-                {
-                    _story.variablesState[varName] = true;
-                }
-            }
-
-            foreach (var quest in GameState.Get<FinishedQuestState>().GetCompletedQuests())
-            {
-                var varName = "completed_" + quest.FinishedQuest.GetId().ToLower();
-                if (_story.variablesState.Contains(varName))
-                {
-                    _story.variablesState[varName] = true;
-                }
-            }
-
-            foreach (var quest in GameState.Get<FinishedQuestState>().GetStartedQuests())
-            {
-                var varName = "started_" + quest.FinishedQuest.GetId().ToLower();
-                if (_story.variablesState.Contains(varName))
-                {
-                    _story.variablesState[varName] = true;
-                }
-            }
-            
+            SetStoryVariables("completable", GameState.Get<FinishedQuestState>().GetCompletableQuests());
+            SetStoryVariables("completed", GameState.Get<FinishedQuestState>().GetCompletedQuests());
+            SetStoryVariables("started", GameState.Get<FinishedQuestState>().GetStartedQuests());
             ShowStory();
+        }
+        
+        private void SetStoryVariables(string prefix, IReadOnlyList<FinishedQuestState.QuestState> quests)
+        {
+            foreach (var quest in quests)
+            {
+                var varName = $"{prefix}_{quest.FinishedQuest.GetId().ToLower()}";
+                if (_story.variablesState.Contains(varName))
+                {
+                    _story.variablesState[varName] = true;
+                }
+            }
         }
         
         private void ShowStory()
@@ -167,8 +156,8 @@ namespace LeonsGeheimeScripts
                 Destroy(child.gameObject);
             }
         }
-        
-        public void CloseStory()
+
+        private void CloseStory()
         {
             gameObject.SetActive(false);
             _story = null;
