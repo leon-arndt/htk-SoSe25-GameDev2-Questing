@@ -22,7 +22,7 @@ namespace LeonsGeheimeScripts
         [SerializeField] private FinishedDialogChoiceView buttonPrefab;
         private Story _story;
         private ItemType[] _itemTypes;
-        
+
         public static FinishedStoryView Instance { get; private set; }
 
         private void Awake()
@@ -30,7 +30,7 @@ namespace LeonsGeheimeScripts
             Instance = this;
             DestroyOldChoices();
             gameObject.SetActive(false);
-            
+
             _itemTypes = Resources.LoadAll<ItemType>("Items");
         }
 
@@ -38,13 +38,13 @@ namespace LeonsGeheimeScripts
         {
             _story = new Story(textAsset.text);
             speakerName.text = character.CharacterName;
-            
+
             SetStoryVariables("completable", GameState.Get<FinishedQuestState>().GetCompletableQuests());
             SetStoryVariables("completed", GameState.Get<FinishedQuestState>().GetCompletedQuests());
             SetStoryVariables("started", GameState.Get<FinishedQuestState>().GetStartedQuests());
             ShowStory();
         }
-        
+
         private void SetStoryVariables(string prefix, IReadOnlyList<FinishedQuestState.QuestState> quests)
         {
             foreach (var quest in quests)
@@ -56,7 +56,7 @@ namespace LeonsGeheimeScripts
                 }
             }
         }
-        
+
         private void ShowStory()
         {
             DestroyOldChoices();
@@ -72,7 +72,7 @@ namespace LeonsGeheimeScripts
                 HandleTags(); // For example: give new quests
             }
         }
-        
+
         private void ShowStoryChunk(string text)
         {
             storyText.text = text;
@@ -93,13 +93,13 @@ namespace LeonsGeheimeScripts
                 choice.onClick.AddListener(CloseStory);
             }
         }
-        
+
         private void OnClickChoiceButton(Choice choice)
         {
             _story.ChooseChoiceIndex(choice.index);
             ShowStory();
         }
-        
+
         private void HandleTags()
         {
             foreach (var storyTag in _story.currentTags)
@@ -129,7 +129,7 @@ namespace LeonsGeheimeScripts
                 }
             }
         }
-        
+
         private Button CreateChoiceView(string text, int index)
         {
             var choice = Instantiate(buttonPrefab, choiceHolder.transform, false);
@@ -141,7 +141,7 @@ namespace LeonsGeheimeScripts
             choice.Set(text, index + 1);
             return choice.Button;
         }
-        
+
         private void DestroyOldChoices()
         {
             foreach (Transform child in choiceHolder)
