@@ -76,15 +76,15 @@ namespace LeonsGeheimeScripts
             while (_story.canContinue)
             {
                 // Continue gets the next line of the story
-                string text = _story.Continue();
+                string chunkText = _story.Continue();
                 // This removes any white space from the text.
-                text = text.Trim();
-                CreateContentView(text); // Display the text on screen!
+                chunkText = chunkText.Trim();
+                ShowStoryChunk(chunkText); // Display the text on screen!
                 HandleTags(); // For example: give new quests
             }
         }
         
-        private void CreateContentView(string text)
+        private void ShowStoryChunk(string text)
         {
             storyText.text = text;
             DestroyOldChoices();
