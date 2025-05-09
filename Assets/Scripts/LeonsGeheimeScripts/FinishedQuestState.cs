@@ -55,12 +55,6 @@ namespace LeonsGeheimeScripts
             Completed = 1
         }
 
-        public void RemoveQuest(string questId)
-        {
-            var match = _questStates.Find(q => q.FinishedQuest.GetId().Equals(questId, StringComparison.OrdinalIgnoreCase));
-            _questStates.Remove(match);
-        }
-
         public void CompleteQuest(string questName)
         {
             var match = _questStates.Find(q => q.FinishedQuest.GetId().Equals(questName, StringComparison.OrdinalIgnoreCase));

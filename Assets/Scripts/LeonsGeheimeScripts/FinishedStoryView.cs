@@ -115,9 +115,6 @@ namespace LeonsGeheimeScripts
                     case "addQuest":
                         GameState.Get<FinishedQuestState>().StartQuest(arg);
                         break;
-                    case "removeQuest":
-                        GameState.Get<FinishedQuestState>().RemoveQuest(arg);
-                        break;
                     case "completeQuest":
                         GameState.Get<FinishedQuestState>().CompleteQuest(arg);
                         break;
