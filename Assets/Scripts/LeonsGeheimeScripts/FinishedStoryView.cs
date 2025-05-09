@@ -102,37 +102,30 @@ namespace LeonsGeheimeScripts
         
         private void HandleTags()
         {
-            if (_story.currentTags.Count <= 0)
+            foreach (var storyTag in _story.currentTags)
             {
-                return;
-            }
+                var parts = storyTag.Split(' ');
+                if (parts.Length < 2) continue;
 
-            foreach (var currentTag in _story.currentTags)
-            {
-                if (currentTag.Contains("addQuest"))
-                {
-                    var questName = currentTag.Split(' ')[1];
-                    GameState.Get<FinishedQuestState>().StartQuest(questName);
-                }
+                var command = parts[0];
+                var arg = parts[1];
 
-                if (currentTag.Contains("removeQuest"))
+                switch (command)
                 {
-                    var questName = currentTag.Split(' ')[1];
-                    GameState.Get<FinishedQuestState>().RemoveQuest(questName);
-                }
-
-                if (currentTag.Contains("completeQuest"))
-                {
-                    var questName = currentTag.Split(' ')[1];
-                    GameState.Get<FinishedQuestState>().CompleteQuest(questName);
-                }
-
-                if (currentTag.Contains("addItem"))
-                {
-                    var itemType = currentTag.Split(' ')[1];
-                    var itemData = _itemTypes.First(i =>
-                        string.Equals(i.name, itemType, StringComparison.OrdinalIgnoreCase));
-                    GameState.Get<InventoryState>().Add(itemData, 1);
+                    case "addQuest":
+                        GameState.Get<FinishedQuestState>().StartQuest(arg);
+                        break;
+                    case "removeQuest":
+                        GameState.Get<FinishedQuestState>().RemoveQuest(arg);
+                        break;
+                    case "completeQuest":
+                        GameState.Get<FinishedQuestState>().CompleteQuest(arg);
+                        break;
+                    case "addItem":
+                        var item = _itemTypes.First(i =>
+                            string.Equals(i.name, arg, StringComparison.OrdinalIgnoreCase));
+                        GameState.Get<InventoryState>().Add(item, 1);
+                        break;
                 }
             }
         }
