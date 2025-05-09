@@ -15,6 +15,7 @@ namespace Logic
         private static readonly List<SaveState> _saveStates = new List<SaveState>()
         {
             new InventoryState(),
+            new QuestsState(),
             // ..., for example QuestState, NpcState, BossState
         };
 
