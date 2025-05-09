@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Logic;
@@ -55,23 +54,23 @@ namespace LeonsGeheimeScripts
             Completed = 1
         }
 
-        public void CompleteQuest(string questName)
+        public void CompleteQuest(string questId)
         {
-            var match = _questStates.Find(q => q.FinishedQuest.GetId().Equals(questName, StringComparison.OrdinalIgnoreCase));
+            var match = _questStates.Find(q => q.FinishedQuest.GetId().Equals(questId, StringComparison.OrdinalIgnoreCase));
             if (match.Status == QuestStatus.Completed)
             {
-                Debug.LogWarning($"Quest {questName} already completed - not completing it again");
+                Debug.LogWarning($"Quest {questId} already completed - not completing it again");
                 return;
             }
 
             if (!match.FinishedQuest.IsMet())
             {
-                Debug.LogWarning($"Quest {questName} not met - not completing it");
+                Debug.LogWarning($"Quest {questId} not met - not completing it");
                 return;
             }
 
             match.Status = QuestStatus.Completed;
-            Debug.Log("Quest " + questName + " completed");
+            Debug.Log("Quest " + questId + " completed");
         }
 
         public IReadOnlyList<QuestState> GetCompletableQuests()
