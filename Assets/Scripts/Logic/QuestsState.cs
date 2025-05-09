@@ -4,6 +4,7 @@ using System.Linq;
 using Data;
 using Logic;
 using UnityEngine;
+using UserInterface;
 
 public class QuestsState : SaveState
 {
@@ -52,6 +53,8 @@ public class QuestsState : SaveState
 
         _activeQuests.Add(questId, state);
         Debug.Log("Quest " + foundQuest.GetId() + " started");
+        
+        ActiveQuestsView.AddQuest(foundQuest);
     }
 
     public void CompleteQuest(string questId)
