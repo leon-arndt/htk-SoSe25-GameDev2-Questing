@@ -16,8 +16,12 @@ namespace LeonsGeheimeScripts
         private void Update()
         {
             DetectInteractables();
+            CheckInteraction();
             UpdateUI();
-            
+        }
+
+        private void CheckInteraction()
+        {
             if (interactionAction.action.triggered && _currentInteractable != null)
             {
                 _currentInteractable.Interact(transform);
