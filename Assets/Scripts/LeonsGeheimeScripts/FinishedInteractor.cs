@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace LeonsGeheimeScripts
 {
     public class FinishedInteractor : MonoBehaviour
     {
+        [SerializeField] private InputActionReference interactionAction;
         [SerializeField] private float interactionRadius = 3f;
         [SerializeField] private LayerMask interactableLayer = 1;
 
@@ -15,8 +17,8 @@ namespace LeonsGeheimeScripts
         {
             DetectInteractables();
             UpdateUI();
-
-            if (Input.GetKeyDown(KeyCode.E) && _currentInteractable != null) // TODO: replace with PlayerInput.actions["Interact"].triggered)
+            
+            if (interactionAction.action.triggered && _currentInteractable != null)
             {
                 _currentInteractable.Interact(transform);
             }
