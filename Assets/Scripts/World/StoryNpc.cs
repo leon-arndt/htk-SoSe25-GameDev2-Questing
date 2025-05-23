@@ -1,6 +1,5 @@
-using Data;
-using Logic;
 using UnityEngine;
+using UserInterface;
 
 namespace World
 {
@@ -12,12 +11,9 @@ namespace World
     {
         [SerializeField] private TextAsset inkStory;
 
-        // TODO: delete this once we show our ink stories which will start the quest
-        [SerializeField] private Quest placeholderQuest;
-
         public override void Interact(Transform interactor)
         {
-            GameState.Get<QuestsState>().StartQuest(placeholderQuest.GetId());
+            StoryView.Instance.StartStory(this, inkStory);
         }
 
         public override string GetInteractionVerb()
