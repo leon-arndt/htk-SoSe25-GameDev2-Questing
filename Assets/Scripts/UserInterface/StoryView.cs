@@ -1,9 +1,13 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Data;
 using Ink.Runtime;
+using Logic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using World;
 
 namespace UserInterface
 {
@@ -32,6 +36,29 @@ namespace UserInterface
             foreach (Transform child in choiceHolder)
             {
                 Destroy(child.gameObject);
+            }
+        }
+        
+        public void StartStory(StoryNpc character, TextAsset inkStory)
+        {
+            _story = new Story(inkStory.text);
+            speakerName.text = character.gameObject.name;
+
+            SetStoryVariables("completed", GameState.Get<QuestsState>().GetAllCompletedQuests());
+            SetStoryVariables("started", GameState.Get<QuestsState>().GetAllStartedQuests());
+            // TODO: ShowStory();
+        }
+
+        private void SetStoryVariables(string prefix, IReadOnlyList<QuestsState.QuestState> quests)
+        {
+            foreach (var quest in quests)
+            {
+                // for example: "completed_quest1" will be set to true or "started_quest1" will be set to true
+                var varName = $"{prefix}_{quest.Quest.GetId().ToLower()}";
+                if (_story.variablesState.Contains(varName))
+                {
+                    _story.variablesState[varName] = true;
+                }
             }
         }
     }
