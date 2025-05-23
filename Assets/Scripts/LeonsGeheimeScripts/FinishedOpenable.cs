@@ -11,18 +11,19 @@ namespace LeonsGeheimeScripts
         [SerializeField] private ItemType requiredItem;
         [SerializeField] public uint requiredAmount = 1;
         [SerializeField] private bool shouldConsume = true;
-        
+
         // gives
         [SerializeField] public ItemType givenItem;
         [SerializeField] private uint givenAmount;
-        
+
         // state
         [SerializeField] private bool stayOpen = true;
         [SerializeField] private Animator animator;
         private bool _isOpen;
-        
+
         public override void Interact(Transform _)
         {
+            // can only be opened once, e.g. a chest
             if (_isOpen)
             {
                 return;
@@ -54,6 +55,7 @@ namespace LeonsGeheimeScripts
         private void Open()
         {
             _isOpen = true;
+
             if (animator != null)
             {
                 animator.SetBool("isOpen", true);
