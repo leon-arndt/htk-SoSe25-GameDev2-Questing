@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UserInterface;
 
 namespace World
@@ -7,7 +8,8 @@ namespace World
     public class Interactor : MonoBehaviour
     {
         [SerializeField] private float interactionDistance = 3f;
-
+        [SerializeField] private InputActionReference interactAction;
+        
         private Interactable _currentInteractable;
         private List<Interactable> _nearbyInteractables = new();
 
@@ -72,8 +74,7 @@ namespace World
 
         private void CheckInteraction()
         {
-            // TODO: bessere Lösung für Controller finden (neues Inputsystem nutzen)
-            if (Input.GetKeyDown(KeyCode.E) && _currentInteractable != null)
+            if (interactAction.action.triggered && _currentInteractable != null)
             {
                 // interagier mit dem interactable in der Nähe
                 _currentInteractable.Interact(transform);
