@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Data;
@@ -127,7 +128,35 @@ namespace UserInterface
 
         private void HandleTags()
         {
-            // TODO: handle tags
+            // example tag: "# startQuest quest1"
+            foreach (var storyTag in _story.currentTags)
+            {
+                var parts = storyTag.Split(' ');
+                if (parts.Length < 2)
+                {
+                    Debug.LogWarning($"Tag '{storyTag}' is not valid. It should be in the format '# command argument'.");
+                    continue;
+                };
+
+                // [command] [argument]
+                var command = parts[0];
+                var argument = parts[1];
+
+                switch (command)
+                {
+                    case "startQuest":
+                        GameState.Get<QuestsState>().StartQuest(argument);
+                        break;
+                    case "completeQuest":
+                        GameState.Get<QuestsState>().CompleteQuest(argument);
+                        break;
+                    case "addItem":
+                        var item = _itemTypes.First(i =>
+                            string.Equals(i.name, argument, StringComparison.OrdinalIgnoreCase));
+                        GameState.Get<InventoryState>().Add(item, 1);
+                        break;
+                }
+            }
         }
     }
 }

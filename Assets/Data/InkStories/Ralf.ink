@@ -7,7 +7,7 @@ Hi my name is Ralf nice to meet you, please give me some coins. This is my desti
 
 
 === Accept ===
-Ok, here's your quest # addQuest Coin10Quest
+Ok, here's your quest # startQuest Coin10Quest
 -> END
 
 
