@@ -67,6 +67,7 @@ namespace UserInterface
         /// </summary>
         private void ShowStory()
         {
+            gameObject.SetActive(true);
             DestroyOldChoices();
 
             // Read all the content until we can't continue any more
