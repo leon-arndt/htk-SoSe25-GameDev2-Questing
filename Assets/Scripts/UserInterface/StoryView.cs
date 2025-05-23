@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Data;
@@ -46,7 +45,7 @@ namespace UserInterface
 
             SetStoryVariables("completed", GameState.Get<QuestsState>().GetAllCompletedQuests());
             SetStoryVariables("started", GameState.Get<QuestsState>().GetAllStartedQuests());
-            // TODO: ShowStory();
+            ShowStory();
         }
 
         private void SetStoryVariables(string prefix, IReadOnlyList<QuestsState.QuestState> quests)
@@ -60,6 +59,75 @@ namespace UserInterface
                     _story.variablesState[varName] = true;
                 }
             }
+        }
+        
+        /// <summary>
+        /// The story is shown when the player STARTS talking to an NPC
+        /// </summary>
+        private void ShowStory()
+        {
+            DestroyOldChoices();
+
+            // Read all the content until we can't continue any more
+            while (_story.canContinue)
+            {
+                // Continue gets the next line of the story
+                string chunkText = _story.Continue();
+                // This removes any white space from the text.
+                chunkText = chunkText.Trim();
+                ShowStoryChunk(chunkText); // Display the text on screen!
+                HandleTags(); // For example: give new quests
+            }
+        }
+        
+        private void ShowStoryChunk(string chunkText)
+        {
+            storyText.text = chunkText;
+            DestroyOldChoices();
+            if (_story.currentChoices.Count > 0)
+            {
+                for (int i = 0; i < _story.currentChoices.Count; i++)
+                {
+                    Choice choice = _story.currentChoices[i];
+                    Button button = CreateChoiceView($"{choice.text.Trim()}", i);
+                    // Tell the button what to do when we press it
+                    button.onClick.AddListener(() => OnClickChoiceButton(choice));
+                }
+            }
+            else
+            {
+                Button choice = CreateChoiceView("Continue", 0);
+                choice.onClick.AddListener(CloseStory);
+            }
+        }
+
+        private void CloseStory()
+        {
+            _story = null;
+            gameObject.SetActive(false);
+        }
+
+        private void OnClickChoiceButton(Choice choice)
+        {
+            _story.ChooseChoiceIndex(choice.index);
+            ShowStory();
+        }
+
+        private Button CreateChoiceView(string choiceText, int index)
+        {
+            var choice = Instantiate(choicePrefab, choiceHolder.transform, false);
+            if (index == 0)
+            {
+                choice.Select();
+            }
+
+            choice.GetComponentInChildren<TextMeshProUGUI>().text = choiceText;
+            return choice;
+        }
+
+        private void HandleTags()
+        {
+            // TODO: handle tags
         }
     }
 }
