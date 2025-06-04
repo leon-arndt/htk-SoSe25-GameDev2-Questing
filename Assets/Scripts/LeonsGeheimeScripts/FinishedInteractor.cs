@@ -24,7 +24,8 @@ namespace LeonsGeheimeScripts
         {
             if (interactionAction.action.triggered && _currentInteractable != null)
             {
-                GetComponent<Animator>().SetTrigger("Interact");
+                GetComponent<Animator>().SetBool("Interact", true);
+                Invoke("StopInteractionAnimation", 0.5f);
                 _currentInteractable.Interact(transform);
             }
         }
