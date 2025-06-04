@@ -24,6 +24,7 @@ namespace LeonsGeheimeScripts
         {
             if (interactionAction.action.triggered && _currentInteractable != null)
             {
+                GetComponent<Animator>().SetTrigger("Interact");
                 _currentInteractable.Interact(transform);
             }
         }
