@@ -63,6 +63,16 @@ namespace UserInterface
             }
         }
 
+        private void Update()
+        {
+            if (gameObject.activeSelf)
+            {
+                
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+
         /// <summary>
         /// The story is shown when the player STARTS talking to an NPC
         /// </summary>
@@ -70,9 +80,6 @@ namespace UserInterface
         {
             gameObject.SetActive(true);
             DestroyOldChoices();
-
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
 
             // Read all the content until we can't continue any more
             while (_story.canContinue)
