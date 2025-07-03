@@ -3140,8 +3140,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 857b2dda933d30b4da7110741887d0bb, type: 2}
+  m_sharedMaterial: {fileID: 6510142921067795034, guid: 857b2dda933d30b4da7110741887d0bb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3659,6 +3659,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1810229934}
     m_Modifications:
+    - target: {fileID: 1878458434576971985, guid: 098278d6d5abf4bdda3b50bc7b848095, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.4301758
+      objectReference: {fileID: 0}
     - target: {fileID: 3458195866966889103, guid: 098278d6d5abf4bdda3b50bc7b848095, type: 3}
       propertyPath: m_text
       value: Quit
@@ -5413,6 +5417,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1810229934}
     m_Modifications:
+    - target: {fileID: 1878458434576971985, guid: 098278d6d5abf4bdda3b50bc7b848095, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.4301758
+      objectReference: {fileID: 0}
     - target: {fileID: 3458195866966889103, guid: 098278d6d5abf4bdda3b50bc7b848095, type: 3}
       propertyPath: m_text
       value: Continue
