@@ -6,6 +6,7 @@ using Ink.Runtime;
 using Logic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UserInterface.Cinematic;
 
@@ -38,6 +39,7 @@ namespace LeonsGeheimeScripts
         {
             _story = new Story(textAsset.text);
             speakerName.text = character.CharacterName;
+            FindAnyObjectByType<PlayerInput>().currentActionMap.Disable();
 
             SetStoryVariables("completable", GameState.Get<FinishedQuestState>().GetCompletableQuests());
             SetStoryVariables("completed", GameState.Get<FinishedQuestState>().GetCompletedQuests());
@@ -150,6 +152,7 @@ namespace LeonsGeheimeScripts
         private void CloseStory()
         {
             gameObject.SetActive(false);
+            FindAnyObjectByType<PlayerInput>().currentActionMap.Enable();
             _story = null;
         }
     }
