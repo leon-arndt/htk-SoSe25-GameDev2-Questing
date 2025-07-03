@@ -17,17 +17,18 @@ namespace UserInterface
         [SerializeField] private TextMeshProUGUI storyText;
         [SerializeField] private TextMeshProUGUI speakerName;
         [SerializeField] private Button choicePrefab;
-        
+
         private Story _story; // this is the Ink story
         private ItemType[] _itemTypes; // we need an array of all item types so dialog can grant items
-        
-        public static StoryView Instance { get; private set; } // this is a singleton which means the entire game can access this
+
+        public static StoryView
+            Instance { get; private set; } // this is a singleton which means the entire game can access this
 
         private void Awake()
         {
             Instance = this;
-            DestroyOldChoices(); 
-            gameObject.SetActive(false); 
+            DestroyOldChoices();
+            gameObject.SetActive(false);
             _itemTypes = Resources.LoadAll<ItemType>("Items");
         }
 
@@ -38,7 +39,7 @@ namespace UserInterface
                 Destroy(child.gameObject);
             }
         }
-        
+
         public void StartStory(StoryNpc character, TextAsset inkStory)
         {
             _story = new Story(inkStory.text);
@@ -61,7 +62,17 @@ namespace UserInterface
                 }
             }
         }
-        
+
+        private void Update()
+        {
+            if (gameObject.activeSelf)
+            {
+                
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+
         /// <summary>
         /// The story is shown when the player STARTS talking to an NPC
         /// </summary>
@@ -81,7 +92,7 @@ namespace UserInterface
                 HandleTags(); // For example: give new quests
             }
         }
-        
+
         private void ShowStoryChunk(string chunkText)
         {
             storyText.text = chunkText;
@@ -107,6 +118,9 @@ namespace UserInterface
         {
             _story = null;
             gameObject.SetActive(false);
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         private void OnClickChoiceButton(Choice choice)
@@ -135,9 +149,12 @@ namespace UserInterface
                 var parts = storyTag.Split(' ');
                 if (parts.Length < 2)
                 {
-                    Debug.LogWarning($"Tag '{storyTag}' is not valid. It should be in the format '# command argument'.");
+                    Debug.LogWarning(
+                        $"Tag '{storyTag}' is not valid. It should be in the format '# command argument'.");
                     continue;
-                };
+                }
+
+                ;
 
                 // [command] [argument]
                 var command = parts[0];
