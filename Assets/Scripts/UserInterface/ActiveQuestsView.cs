@@ -29,5 +29,18 @@ namespace UserInterface
             var questView = Instantiate(_instance.questViewPrefab, _instance.questsLayoutGroup);
             questView.SetQuest(quest);
         }
+
+        public static void RemoveQuest(string questId)
+        {
+            var activeQuestViews = _instance.questsLayoutGroup.GetComponentsInChildren<ActiveQuestView>();
+
+            foreach (var activeQuestView in activeQuestViews)
+            {
+                if (activeQuestView.Quest.GetId() == questId)
+                {
+                    Destroy(activeQuestView.gameObject);
+                }
+            }
+        }
     }
 }

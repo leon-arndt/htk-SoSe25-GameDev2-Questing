@@ -79,6 +79,7 @@ public class QuestsState : SaveState
 
         questState.Status = QuestStatus.Completed;
         Debug.Log("Quest " + questId + " completed");
+        ActiveQuestsView.RemoveQuest(questId);
     }
 
     public IReadOnlyList<QuestState> GetAllActiveQuests()

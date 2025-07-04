@@ -16,6 +16,8 @@ namespace UserInterface
         private GameObject questConditionsMetIndicator;
 
         private Quest _quest;
+
+        public Quest Quest => _quest;
         
         public void SetQuest(Quest quest)
         {
