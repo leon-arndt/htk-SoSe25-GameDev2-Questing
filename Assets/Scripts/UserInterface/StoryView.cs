@@ -47,6 +47,8 @@ namespace UserInterface
 
             SetStoryVariables("completed", GameState.Get<QuestsState>().GetAllCompletedQuests());
             SetStoryVariables("started", GameState.Get<QuestsState>().GetAllStartedQuests());
+            SetStoryVariables("completable", GameState.Get<QuestsState>().GetAllCompletableQuests());
+            
             ShowStory();
         }
 

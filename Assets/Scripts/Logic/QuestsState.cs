@@ -98,6 +98,11 @@ public class QuestsState : SaveState
         // get all quests which were completed
         return _activeQuests.Values.Where(q => q.Status == QuestStatus.Completed).ToList();
     }
+    
+    public IReadOnlyList<QuestState> GetAllCompletableQuests()
+    {
+        return _activeQuests.Values.Where(q => q.Status == QuestStatus.Started && q.Quest.AreConditionsMet()).ToList();
+    }
 
     public class QuestState
     {
