@@ -20,5 +20,6 @@ Ok, let me know if you change your mind.
 -> END
 
 === CompleteQuest === 
+# completeQuest Coin10Quest
 You're the best, thanks for the coins!
 -> END
