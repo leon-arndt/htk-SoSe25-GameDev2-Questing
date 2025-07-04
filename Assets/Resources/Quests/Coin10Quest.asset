@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e29d75c81c444f8199e487453732c6, type: 3}
   m_Name: Coin10Quest
   m_EditorClassIdentifier: 
-  description: Collect 10 coins
+  description: Collect 1 coin
   isHidden: 0
   conditions:
   - rid: 7113576926540726535
@@ -23,4 +23,4 @@ MonoBehaviour:
       type: {class: HasItemCondition, ns: Data, asm: Assembly-CSharp}
       data:
         type: {fileID: 11400000, guid: 93d044ee2816d4dc4843f1cdf19b2a66, type: 2}
-        amount: 10
+        amount: 1

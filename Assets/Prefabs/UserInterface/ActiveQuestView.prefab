@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 3040293789971198599}
   - component: {fileID: 159663488864396255}
   m_Layer: 5
-  m_Name: QuestFinishable
+  m_Name: QuestConditionsMetIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,6 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questNameText: {fileID: 8527665148270017323}
+  questConditionsMetIndicator: {fileID: 2081231355637781541}
 --- !u!1 &4253325262032547843
 GameObject:
   m_ObjectHideFlags: 0
