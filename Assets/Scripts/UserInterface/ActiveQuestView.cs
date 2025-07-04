@@ -11,10 +11,27 @@ namespace UserInterface
     {
         [SerializeField]
         private TextMeshProUGUI questNameText;
+
+        [SerializeField]
+        private GameObject questConditionsMetIndicator;
+
+        private Quest _quest;
         
-        public void Refresh(Quest quest)
+        public void SetQuest(Quest quest)
         {
-            questNameText.text = quest.GetDescription();
+            _quest = quest;
+        }
+        
+        public void Update()
+        {
+            if (_quest == null)
+            {
+                return;
+            }
+
+            questNameText.text = _quest.GetDescription();
+            bool conditionsMet = _quest.AreConditionsMet();
+            questConditionsMetIndicator.SetActive(conditionsMet);
         }
     }
 }

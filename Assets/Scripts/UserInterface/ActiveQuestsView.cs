@@ -27,7 +27,7 @@ namespace UserInterface
         public static void AddQuest(Quest quest)
         {
             var questView = Instantiate(_instance.questViewPrefab, _instance.questsLayoutGroup);
-            questView.Refresh(quest);
+            questView.SetQuest(quest);
         }
     }
 }
