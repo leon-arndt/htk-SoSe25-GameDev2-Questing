@@ -10,5 +10,8 @@ namespace Data
 
         // this ID is not shown to the player, it's only used to identify the quest
         public string GetId();
+
+        // this is used to bring the player to the end screen
+        public bool IsFinalQuest();
     }
 }

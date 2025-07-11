@@ -15,6 +15,8 @@ namespace Data
         [SerializeReference, SubclassSelector]
         public List<IQuestCondition> conditions;
 
+        public bool isFinalQuest;
+
         public bool AreConditionsMet()
         {
             foreach (var condition in conditions)
@@ -41,6 +43,11 @@ namespace Data
         public string GetId()
         {
             return name;
+        }
+
+        public bool IsFinalQuest()
+        {
+            return isFinalQuest;
         }
     }
 }

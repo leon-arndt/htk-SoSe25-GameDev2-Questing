@@ -34,7 +34,7 @@ namespace Logic
                 state.OnEndGame();
             }
 
-            // optionally: also load the win screen scene
+            // also load the win screen scene
             SceneManager.LoadScene(2);
         }
 
