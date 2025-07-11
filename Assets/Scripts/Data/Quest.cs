@@ -15,7 +15,8 @@ namespace Data
         [SerializeReference, SubclassSelector]
         public List<IQuestCondition> conditions;
 
-        public bool isFinalQuest;
+        [SerializeField]
+        private bool isFinalQuest;
 
         public bool AreConditionsMet()
         {
