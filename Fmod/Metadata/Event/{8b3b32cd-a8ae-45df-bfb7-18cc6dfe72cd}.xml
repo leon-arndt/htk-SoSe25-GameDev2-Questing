@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{8b3b32cd-a8ae-45df-bfb7-18cc6dfe72cd}">
 		<property name="name">
-			<value>TestEvent</value>
+			<value>ButtonClick</value>
 		</property>
 		<property name="outputFormat">
 			<value>0</value>
 		</property>
 		<relationship name="folder">
-			<destination>{0d6877b8-8924-4a0e-8340-2874a9665a8d}</destination>
+			<destination>{598fe961-469c-4c4a-8959-e02933d0ad5a}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{5505a3d1-5c8b-43c3-9bdb-525c020ebd0f}</destination>
@@ -27,6 +27,9 @@
 		</relationship>
 		<relationship name="timeline">
 			<destination>{5e0ffd9c-cdde-47b9-b737-9130d34901c6}</destination>
+		</relationship>
+		<relationship name="banks">
+			<destination>{d6fe3cd0-55d7-459c-94e4-c7a8ce74b2cc}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{5505a3d1-5c8b-43c3-9bdb-525c020ebd0f}">
