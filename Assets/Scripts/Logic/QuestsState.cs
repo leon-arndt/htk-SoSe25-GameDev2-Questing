@@ -80,11 +80,6 @@ public class QuestsState : SaveState
         questState.Status = QuestStatus.Completed;
         Debug.Log("Quest " + questId + " completed");
         ActiveQuestsView.RemoveQuest(questId);
-
-        if (questState.Quest.IsFinalQuest())
-        {
-            GameState.EndGame();
-        }
     }
 
     public IReadOnlyList<QuestState> GetAllActiveQuests()
@@ -108,6 +103,19 @@ public class QuestsState : SaveState
     public IReadOnlyList<QuestState> GetAllCompletableQuests()
     {
         return _activeQuests.Values.Where(q => q.Status == QuestStatus.Started && q.Quest.AreConditionsMet()).ToList();
+    }
+
+    public bool IsFinalQuestFinished()
+    {
+        foreach (var activeQuest in _activeQuests)
+        {
+            if (activeQuest.Value.Status == QuestStatus.Completed && activeQuest.Value.Quest.IsFinalQuest())
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public class QuestState

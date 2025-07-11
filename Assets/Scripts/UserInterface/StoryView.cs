@@ -120,6 +120,12 @@ namespace UserInterface
         {
             _story = null;
             gameObject.SetActive(false);
+            
+            
+            if (GameState.Get<QuestsState>().IsFinalQuestFinished())
+            {
+                GameState.EndGame();
+            }
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
