@@ -78,6 +78,7 @@ namespace World
             {
                 // interagier mit dem interactable in der Nähe
                 _currentInteractable.Interact(transform);
+                var trigger = _currentInteractable.GetInteractionAnimationTrigger;
             }
         }
 

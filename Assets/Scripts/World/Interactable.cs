@@ -14,5 +14,7 @@ namespace World
         /// </summary>
         /// <returns></returns>
         public abstract string GetInteractionVerb();
+
+        public virtual string GetInteractionAnimationTrigger => "Interact";
     }
 }
