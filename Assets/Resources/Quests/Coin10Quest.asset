@@ -16,7 +16,7 @@ MonoBehaviour:
   isHidden: 0
   conditions:
   - rid: 7113576926540726535
-  isFinalQuest: 1
+  isFinalQuest: 0
   references:
     version: 2
     RefIds:

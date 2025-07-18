@@ -5,6 +5,8 @@ using Data;
 using Logic;
 using UnityEngine;
 using UserInterface;
+using World;
+using Object = System.Object;
 
 public class QuestsState : SaveState
 {
@@ -78,6 +80,17 @@ public class QuestsState : SaveState
         }
 
         questState.Status = QuestStatus.Completed;
+
+        var lockedByQuests = UnityEngine.Object.FindObjectsByType<LockedByQuest>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+        foreach (var lockedByQuest in lockedByQuests)
+        {
+            if (lockedByQuest.RequiredQuest == questState.Quest)
+            {
+                lockedByQuest.gameObject.SetActive(true);
+            }
+        }
+        
         Debug.Log("Quest " + questId + " completed");
         ActiveQuestsView.RemoveQuest(questId);
     }
