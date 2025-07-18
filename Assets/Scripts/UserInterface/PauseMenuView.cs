@@ -2,51 +2,68 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace UserInterface
+namespace FinishedScripts
 {
     public class PauseMenuView : MonoBehaviour
     {
-        [SerializeField] private GameObject pausePanel;
-        [SerializeField] private Button continueButton;
         [SerializeField] private InputActionReference pauseAction;
-        
+        [SerializeField] private GameObject pauseUi;
+        [SerializeField] private GameObject settingsUi;
+        [SerializeField] private Button settingsButton;
+        [SerializeField] private Button continueButton;
+        [SerializeField] private Button returnToPauseButton;
+
         private void Awake()
         {
-            Continue();
+            settingsButton.onClick.AddListener(ActivateSettings);
             continueButton.onClick.AddListener(Continue);
-        }
+            returnToPauseButton.onClick.AddListener(ActivatePauseMenu);
 
-        private void Continue()
-        {
-            pausePanel.SetActive(false);
-            Time.timeScale = 1f;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-
-        private void Pause()
-        {
-            pausePanel.SetActive(true);
-            Time.timeScale = 0f;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            pauseUi.SetActive(false);
+            settingsUi.SetActive(false);
         }
 
         private void Update()
         {
             if (pauseAction.action.WasPressedThisFrame())
             {
-                if (pausePanel.activeSelf)
+                if (settingsUi.activeSelf)
                 {
-                    // if the pause menu is active the game is paused: then we want to continue
+                    ActivatePauseMenu();
+                }
+                else if (pauseUi.activeSelf)
+                {
                     Continue();
                 }
                 else
                 {
-                    // if the pause menu is not active the game is not paused: then we want to pause
-                    Pause();
+                    ActivatePauseMenu();
                 }
             }
+        }
+
+        private void Continue()
+        {
+            pauseUi.SetActive(false);
+            settingsUi.SetActive(false);
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+        private void ActivateSettings()
+        {
+            pauseUi.SetActive(false);
+            settingsUi.SetActive(true);
+        }
+
+        private void ActivatePauseMenu()
+        {
+            settingsUi.SetActive(false);
+            pauseUi.SetActive(true);
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }
