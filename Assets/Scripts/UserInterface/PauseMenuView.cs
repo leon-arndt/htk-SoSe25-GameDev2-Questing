@@ -55,12 +55,14 @@ namespace UserInterface
         {
             pauseUi.SetActive(false);
             settingsUi.SetActive(true);
+            returnToPauseButton.Select();
         }
 
         private void ActivatePauseMenu()
         {
             settingsUi.SetActive(false);
             pauseUi.SetActive(true);
+            continueButton.Select();
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
