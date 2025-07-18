@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace FinishedScripts
+namespace UserInterface
 {
     public class PauseMenuView : MonoBehaviour
     {
