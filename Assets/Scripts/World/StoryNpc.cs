@@ -20,5 +20,7 @@ namespace World
         {
             return "Talk";
         }
+
+        public override string GetInteractionAnimationTrigger => "Talk";
     }
 }
