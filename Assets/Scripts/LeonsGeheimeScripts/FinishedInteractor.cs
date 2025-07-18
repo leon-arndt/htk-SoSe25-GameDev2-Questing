@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,7 @@ namespace LeonsGeheimeScripts
         [SerializeField] private InputActionReference interactionAction;
         [SerializeField] private float interactionRadius = 3f;
         [SerializeField] private LayerMask interactableLayer = 1;
+        [SerializeField] private Animator animator;
 
         private FinishedInteractable _currentInteractable;
         private List<FinishedInteractable> _nearbyInteractables = new();
@@ -24,8 +26,8 @@ namespace LeonsGeheimeScripts
         {
             if (interactionAction.action.triggered && _currentInteractable != null)
             {
-                GetComponent<Animator>().SetBool("Interact", true);
-                Invoke("StopInteractionAnimation", 0.5f);
+                GetComponent<Animator>().SetBool("Gather", true);
+                // Invoke(nameof(StopInteractionAnimation), 0.5f);
                 _currentInteractable.Interact(transform);
             }
         }
