@@ -1,6 +1,6 @@
 VAR completable_coin10quest = false
 
-Hi my name is Ralf nice to meet you, please give me some coins. This is my destiny in life - I need coins.
+Hi my name is Ralf nice to meet you, please give me some coins. This is my destiny in life - I need coins. # addItem Coin
 
  * Give me the quest
     -> Accept
