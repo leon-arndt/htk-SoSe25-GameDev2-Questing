@@ -24,6 +24,8 @@ namespace UserInterface
         public static StoryView
             Instance { get; private set; } // this is a singleton which means the entire game can access this
 
+        public List<string> metSpeakers = new List<string>(); // this is a list of all speakers the player has met
+
         private void Awake()
         {
             Instance = this;
@@ -44,6 +46,7 @@ namespace UserInterface
         {
             _story = new Story(inkStory.text);
             speakerName.text = character.gameObject.name;
+            metSpeakers.Add(character.gameObject.name);
 
             SetStoryVariables("completed", GameState.Get<QuestsState>().GetAllCompletedQuests());
             SetStoryVariables("started", GameState.Get<QuestsState>().GetAllStartedQuests());

@@ -1,4 +1,5 @@
 VAR completable_coin10quest = false
+VAR completed_coin10quest = false
 
 Hi my name is Ralf nice to meet you, please give me some coins. This is my destiny in life - I need coins. # addItem Coin
 
@@ -8,6 +9,8 @@ Hi my name is Ralf nice to meet you, please give me some coins. This is my desti
     -> Decline
 * {completable_coin10quest} I finished your quest, here you go!
    -> CompleteQuest
+* {completed_coin10quest} Do you have any friends?
+   -> AddQuestMeetMona
 
 
 === Accept ===
@@ -22,4 +25,8 @@ Ok, let me know if you change your mind.
 === CompleteQuest === 
 # completeQuest Coin10Quest
 You're the best, thanks for the coins!
+-> END
+
+=== AddQuestMeetMona === 
+I do, please go and find Mona # startQuest TalkToMona
 -> END
