@@ -161,12 +161,12 @@ namespace UserInterface
 
         private void HandleTags()
         {
-            foreach (var tag in _story.currentTags)
+            foreach (var currentTag in _story.currentTags)
             {
-                var parts = tag.Split(' ');
+                var parts = currentTag.Split(' ');
                 if (parts.Length < 2)
                 {
-                    Debug.LogWarning($"Tag '{tag}' is invalid. Expected format '# command argument'.");
+                    Debug.LogWarning($"Tag '{currentTag}' is invalid. Expected format '# command argument'.");
                     continue;
                 }
 
