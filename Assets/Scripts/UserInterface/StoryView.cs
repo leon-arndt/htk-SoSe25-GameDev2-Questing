@@ -49,14 +49,15 @@ namespace UserInterface
             speakerName.text = character.gameObject.name;
             metSpeakers.Add(character.gameObject.name);
 
-            SetStoryVariables("completed", GameState.Get<QuestsState>().GetAllCompletedQuests());
-            SetStoryVariables("started", GameState.Get<QuestsState>().GetAllStartedQuests());
-            SetStoryVariables("completable", GameState.Get<QuestsState>().GetAllCompletableQuests());
+            // below are the variables that are set in the ink story based on the game state
+            SetInkStoryVariables("completed", GameState.Get<QuestsState>().GetAllCompletedQuests());
+            SetInkStoryVariables("started", GameState.Get<QuestsState>().GetAllStartedQuests());
+            SetInkStoryVariables("completable", GameState.Get<QuestsState>().GetAllCompletableQuests());
 
             ShowNext();
         }
 
-        private void SetStoryVariables(string prefix, IReadOnlyList<QuestsState.QuestState> quests)
+        private void SetInkStoryVariables(string prefix, IReadOnlyList<QuestsState.QuestState> quests)
         {
             foreach (var quest in quests)
             {
@@ -89,7 +90,7 @@ namespace UserInterface
                 }
 
                 ShowChunk(text);
-                HandleTags();
+                HandleInkTags();
             }
             else if (_story.currentChoices.Count > 0)
             {
@@ -159,7 +160,8 @@ namespace UserInterface
             _playerController.enabled = true;
         }
 
-        private void HandleTags()
+        // ink can talk to Unity by using tags
+        private void HandleInkTags()
         {
             foreach (var currentTag in _story.currentTags)
             {
@@ -190,6 +192,7 @@ namespace UserInterface
             }
         }
 
+        // we need to destroy old choices to avoid memory leaks and UI clutter
         private void DestroyOldChoices()
         {
             foreach (Transform child in choiceHolder)
