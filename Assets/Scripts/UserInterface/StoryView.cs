@@ -4,6 +4,7 @@ using System.Linq;
 using Data;
 using Ink.Runtime;
 using Logic;
+using StarterAssets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,7 @@ namespace UserInterface
         private Story _story;
         private ItemType[] _itemTypes;
         private string _lastChoiceText;
+        private ThirdPersonController _playerController;
 
         public static StoryView Instance { get; private set; }
         public List<string> metSpeakers = new();
@@ -31,12 +33,14 @@ namespace UserInterface
             DestroyOldChoices();
             gameObject.SetActive(false);
             _itemTypes = Resources.LoadAll<ItemType>("Items");
+            _playerController = FindAnyObjectByType<ThirdPersonController>();
         }
 
         private void Update()
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            _playerController.enabled = false;
         }
 
         public void StartStory(StoryNpc character, TextAsset inkStory)
@@ -58,7 +62,9 @@ namespace UserInterface
             {
                 var varName = $"{prefix}_{quest.Quest.GetId().ToLower()}";
                 if (_story.variablesState.Contains(varName))
+                {
                     _story.variablesState[varName] = true;
+                }
             }
         }
 
@@ -150,6 +156,7 @@ namespace UserInterface
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            _playerController.enabled = true;
         }
 
         private void HandleTags()
