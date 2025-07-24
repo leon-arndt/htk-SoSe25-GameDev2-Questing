@@ -147,7 +147,9 @@ namespace UserInterface
             gameObject.SetActive(false);
 
             if (GameState.Get<QuestsState>().IsFinalQuestFinished())
+            {
                 GameState.EndGame();
+            }
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -199,7 +201,9 @@ namespace UserInterface
             button.onClick.AddListener(() => onClick());
 
             if (select)
+            {
                 button.Select();
+            }
         }
     }
 }
