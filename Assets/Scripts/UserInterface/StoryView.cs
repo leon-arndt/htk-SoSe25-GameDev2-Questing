@@ -35,11 +35,8 @@ namespace UserInterface
 
         private void Update()
         {
-            if (gameObject.activeSelf)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         public void StartStory(StoryNpc character, TextAsset inkStory)
