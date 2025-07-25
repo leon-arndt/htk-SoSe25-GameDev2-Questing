@@ -1167,6 +1167,7 @@ MonoBehaviour:
   storyText: {fileID: 6425400736659348491}
   speakerName: {fileID: 1764388269273379640}
   choicePrefab: {fileID: 4276908599784565508, guid: 1d89d695862d24889aa5c6521934df17, type: 3}
+  metSpeakers: []
 --- !u!1 &7789072248849569178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,7 +1221,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 1
   m_Spacing: 15
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
