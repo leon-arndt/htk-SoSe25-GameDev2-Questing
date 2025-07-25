@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UserInterface;
 
 namespace World
@@ -10,9 +11,11 @@ namespace World
     public class StoryNpc : Interactable
     {
         [SerializeField] private TextAsset inkStory;
+        [SerializeField] private UnityEvent onInteract;
 
         public override void Interact(Transform interactor)
         {
+            onInteract?.Invoke();
             StoryView.Instance.StartStory(this, inkStory);
         }
 

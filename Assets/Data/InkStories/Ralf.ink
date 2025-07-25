@@ -3,8 +3,6 @@ VAR completed_coin10quest = false
 
 Can anyone hear me?
 Hi my name is Ralf nice to meet you, please give me some coins. 
-
-
 This is my destiny in life - I need coins. # addItem Coin
 
  * Give me the quest
