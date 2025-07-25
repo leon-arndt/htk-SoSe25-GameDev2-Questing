@@ -109,7 +109,7 @@ namespace UserInterface
 
             if (_story.canContinue)
             {
-                CreateButton("Continue", ShowNext);
+                CreateButton("Continue", ShowNext, true);
             }
             else if (_story.currentChoices.Count > 0)
             {
@@ -142,7 +142,7 @@ namespace UserInterface
         private void ShowCloseButton()
         {
             DestroyOldChoices();
-            CreateButton("Continue", CloseStory);
+            CreateButton("Continue", CloseStory, true);
         }
 
         private void CloseStory()
@@ -201,7 +201,7 @@ namespace UserInterface
             }
         }
 
-        private void CreateButton(string text, Action onClick, bool select = false)
+        private void CreateButton(string text, Action onClick, bool select)
         {
             var button = Instantiate(choicePrefab, choiceHolder);
             button.GetComponentInChildren<TextMeshProUGUI>().text = text;
