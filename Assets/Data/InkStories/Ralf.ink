@@ -9,6 +9,8 @@ This is my destiny in life - I need coins. # addItem Coin
     -> Accept
  * No, leave me alone
     -> Decline
+* I want to give you a coin
+      -> GiveCoin
 * {completable_coin10quest} I finished your quest, here you go!
    -> CompleteQuest
 * {completed_coin10quest} Do you have any friends?
@@ -31,4 +33,9 @@ You're the best, thanks for the coins!
 
 === AddQuestMeetMona === 
 I do, please go and find Mona # startQuest TalkToMona
+-> END
+
+
+=== GiveCoin ===
+Thanks for the coin #removeItem Coin
 -> END

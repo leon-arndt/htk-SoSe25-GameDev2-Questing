@@ -188,6 +188,11 @@ namespace UserInterface
                             string.Equals(i.name, argument, StringComparison.OrdinalIgnoreCase));
                         GameState.Get<InventoryState>().Add(item, 1);
                         break;
+                    case "removeItem":
+                        var itemToRemove = _itemTypes.First(i =>
+                            string.Equals(i.name, argument, StringComparison.OrdinalIgnoreCase));
+                        GameState.Get<InventoryState>().TryRemove(itemToRemove, 1);
+                        break;
                 }
             }
         }
