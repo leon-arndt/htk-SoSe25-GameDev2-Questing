@@ -1300,7 +1300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9caa2b165916413287903b5b7a17541b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionDistance: 3
+  interactionDistance: 1.5
   interactAction: {fileID: 2374225505043290429, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
 --- !u!1 &4523139366846529165
 GameObject:
